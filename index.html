@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#2a0a12">
+    <meta name="theme-color" content="#fff5f7">
     <title>For You ♡</title>
     
     <!-- ========================================== -->
@@ -11,24 +11,23 @@
     <!-- ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         /* ========================================== */
-        /* COLORS & VARIABLES                         */
+        /* COLORS & VARIABLES (BRIGHT & CUTE)         */
         /* ========================================== */
         :root {
-            --bg-dark: #1a050a;
-            --deep-rose: #4a0414;
-            --rose: #881337;
-            --blush: #fecdd3;
-            --soft-pink: #ffe4e6;
-            --cream: #fff1f2;
-            --gold: #fbbf24;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #fff1f2;
-            --text-secondary: #fecdd3;
+            --bg-cream: #fff5f7;
+            --soft-pink: #ffe4ec;
+            --bubblegum: #ffb6c1;
+            --blush: #ffc2cd;
+            --hot-pink: #ff69b4;
+            --text-dark: #d63384; /* Soft magenta, NOT dark red */
+            --text-soft: #e85d85;
+            --white-glass: rgba(255, 255, 255, 0.65);
+            --shadow-soft: 0 10px 40px rgba(214, 51, 132, 0.1);
+            --glow-pink: 0 0 30px rgba(255, 182, 193, 0.6);
         }
 
         /* ========================================== */
@@ -48,13 +47,13 @@
             width: 100%;
             overflow: hidden;
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-primary);
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
             touch-action: manipulation;
         }
 
         /* ========================================== */
-        /* LIVING BACKGROUND                          */
+        /* LIVING BRIGHT BACKGROUND                   */
         /* ========================================== */
         .bg-layer {
             position: fixed;
@@ -68,58 +67,33 @@
 
         .bg-gradient {
             background: 
-                radial-gradient(circle at 20% 30%, rgba(136, 19, 55, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(254, 205, 211, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(74, 4, 20, 0.8) 0%, var(--bg-dark) 100%);
-            animation: bgPulse 15s ease-in-out infinite alternate;
+                radial-gradient(circle at 30% 20%, rgba(255, 182, 193, 0.6) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255, 228, 236, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 245, 247, 1) 0%, var(--bg-cream) 100%);
+            animation: bgPulse 12s ease-in-out infinite alternate;
         }
 
         @keyframes bgPulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 1; }
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
         }
 
         .bg-blob {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: floatBlob 20s infinite ease-in-out;
+            filter: blur(60px);
+            opacity: 0.6;
+            animation: floatBlob 15s infinite ease-in-out;
         }
 
-        .blob-1 { width: 300px; height: 300px; background: var(--rose); top: -10%; left: -10%; animation-delay: 0s; }
-        .blob-2 { width: 400px; height: 400px; background: var(--deep-rose); bottom: -10%; right: -10%; animation-delay: -5s; }
-        .blob-3 { width: 200px; height: 200px; background: var(--blush); top: 40%; left: 60%; animation-delay: -10s; opacity: 0.2; }
+        .blob-1 { width: 300px; height: 300px; background: var(--bubblegum); top: -5%; left: -5%; animation-delay: 0s; }
+        .blob-2 { width: 350px; height: 350px; background: var(--blush); bottom: -5%; right: -5%; animation-delay: -5s; }
+        .blob-3 { width: 200px; height: 200px; background: var(--soft-pink); top: 40%; left: 60%; animation-delay: -10s; }
 
         @keyframes floatBlob {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-
-        /* Film Grain Overlay */
-        .grain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        /* Vignette */
-        .vignette {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.6) 100%);
+            33% { transform: translate(20px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
         }
 
         /* ========================================== */
@@ -131,44 +105,41 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 3;
+            z-index: 1;
             pointer-events: none;
             overflow: hidden;
         }
 
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
         .heart-particle {
-            color: var(--blush);
-            font-size: 14px;
+            position: absolute;
+            color: var(--hot-pink);
             opacity: 0;
             animation: floatUpHeart linear forwards;
         }
 
         .sparkle {
+            position: absolute;
             background: white;
-            box-shadow: 0 0 4px white, 0 0 8px var(--blush);
+            border-radius: 50%;
+            box-shadow: 0 0 6px white, 0 0 10px var(--bubblegum);
+            opacity: 0;
             animation: twinkle ease-in-out forwards;
         }
 
         @keyframes floatUpHeart {
             0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.3; }
-            100% { transform: translateY(-100vh) translateX(var(--drift)) scale(1); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100vh) translateX(var(--drift)) scale(1.2); opacity: 0; }
         }
 
         @keyframes twinkle {
             0%, 100% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 0.8; transform: scale(1.2); }
+            50% { opacity: 0.9; transform: scale(1.3); }
         }
 
         /* ========================================== */
-        /* SCREEN MANAGEMENT & TRANSITIONS            */
+        /* SCREEN MANAGEMENT & CUTE TRANSITIONS       */
         /* ========================================== */
         .screen {
             position: absolute;
@@ -180,47 +151,47 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             z-index: 10;
             opacity: 0;
             pointer-events: none;
-            transform: scale(0.95);
-            filter: blur(10px);
-            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-                        filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.95) translateY(20px);
+            filter: blur(8px);
+            transition: opacity 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        filter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow-y: auto;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
         .screen::-webkit-scrollbar { display: none; }
 
         .screen.active {
             opacity: 1;
             pointer-events: all;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
             filter: blur(0);
         }
 
         .screen.exit {
             opacity: 0;
-            transform: scale(1.05);
-            filter: blur(10px);
+            transform: scale(1.05) translateY(-20px);
+            filter: blur(12px);
         }
 
-        /* Transition Overlay */
-        .transition-overlay {
+        /* Bright transition flash */
+        .transition-flash {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, var(--rose) 0%, var(--bg-dark) 100%);
+            background: radial-gradient(circle, var(--soft-pink) 0%, var(--bg-cream) 100%);
             z-index: 50;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
         }
-        .transition-overlay.active {
+        .transition-flash.active {
             opacity: 1;
             pointer-events: all;
         }
@@ -236,28 +207,27 @@
         }
 
         .title-large {
-            font-size: 3.5rem;
-            background: linear-gradient(to bottom, var(--cream), var(--blush));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(254, 205, 211, 0.3);
+            font-size: 3rem;
+            color: var(--text-dark);
             margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
         }
 
         .subtitle {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 300;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--text-soft);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .letter-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            line-height: 1.6;
-            color: var(--text-primary);
+            font-size: 1.5rem;
+            line-height: 1.5;
+            color: var(--text-dark);
             text-align: center;
             max-width: 350px;
             margin: 0 auto 1.5rem;
@@ -272,7 +242,7 @@
         }
 
         .highlight {
-            color: var(--blush);
+            color: var(--hot-pink);
             font-style: italic;
             font-weight: 600;
         }
@@ -281,21 +251,21 @@
         /* UI ELEMENTS                                */
         /* ========================================== */
         .btn {
-            background: transparent;
-            color: var(--blush);
-            border: 1px solid rgba(254, 205, 211, 0.3);
+            background: linear-gradient(135deg, var(--bubblegum), var(--hot-pink));
+            color: white;
+            border: none;
             padding: 1rem 2.5rem;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-family: 'Poppins', sans-serif;
-            font-weight: 400;
-            letter-spacing: 0.1em;
+            font-weight: 500;
             border-radius: 50px;
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
-            box-shadow: 0 0 20px rgba(254, 205, 211, 0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-top: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            min-height: 56px;
         }
 
         .btn::before {
@@ -305,7 +275,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left 0.5s ease;
         }
 
@@ -314,29 +284,148 @@
         }
 
         .btn:active {
-            transform: scale(0.95);
-            background: rgba(254, 205, 211, 0.1);
+            transform: scale(0.92);
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.4);
         }
 
         .btn-glow {
-            animation: btnPulse 3s infinite;
+            animation: btnPulse 2.5s infinite;
         }
 
         @keyframes btnPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(254, 205, 211, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(254, 205, 211, 0.3), 0 0 10px rgba(136, 19, 55, 0.5); }
+            0%, 100% { box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3); }
+            50% { box-shadow: 0 4px 25px rgba(255, 105, 180, 0.6), 0 0 10px var(--bubblegum); }
         }
 
         /* ========================================== */
-        /* SCREEN SPECIFIC STYLES                     */
+        /* PHOTO FRAMES (VARIED & ELEGANT)            */
         /* ========================================== */
         
-        /* Screen 3: Gift */
+        /* Frame 1: Polaroid */
+        .photo-polaroid {
+            background: white;
+            padding: 12px 12px 45px 12px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-soft), 0 2px 4px rgba(0,0,0,0.05);
+            transform: rotate(-3deg);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            max-width: 280px;
+            margin: 1.5rem auto;
+            opacity: 0;
+            animation: popIn 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        .photo-polaroid:active {
+            transform: rotate(0deg) scale(0.98);
+        }
+        .photo-polaroid img {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4/5;
+        }
+        .polaroid-heart {
+            position: absolute;
+            bottom: 12px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--hot-pink);
+            transform: rotate(15deg);
+        }
+
+        /* Frame 2: Blended Portrait */
+        .photo-blended {
+            position: relative;
+            width: 260px;
+            height: 340px;
+            margin: 1.5rem auto;
+            border-radius: 130px 130px 20px 20px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(255, 182, 193, 0.5);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+        .photo-blended.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .photo-blended img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.5s ease;
+        }
+        .photo-blended:active img {
+            transform: scale(1.05);
+        }
+        .photo-blended::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 130px 130px 20px 20px;
+            box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+        }
+
+        /* Frame 3: Glass Card */
+        .photo-glass {
+            background: var(--white-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            padding: 12px;
+            box-shadow: var(--shadow-soft), inset 0 0 20px rgba(255, 255, 255, 0.5);
+            max-width: 300px;
+            margin: 1.5rem auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            animation: floatGlass 4s ease-in-out infinite;
+        }
+        .photo-glass.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @keyframes floatGlass {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .photo-glass img {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 3/4;
+        }
+
+        /* Frame 4: Cinematic Background Blend (Final Screen) */
+        .final-bg-photo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            object-fit: cover;
+            opacity: 0.25;
+            filter: blur(3px) saturate(1.2);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ========================================== */
+        /* SCREEN SPECIFIC: GIFT REVEAL               */
+        /* ========================================== */
         .gift-container {
             position: relative;
             width: 160px;
             height: 160px;
-            margin: 2rem auto;
+            margin: 1.5rem auto;
             cursor: pointer;
             transition: transform 0.3s ease;
         }
@@ -345,7 +434,7 @@
         .gift-svg {
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.3));
         }
 
         .gift-lid {
@@ -357,16 +446,22 @@
             transform: translateY(-30px) rotate(-20deg);
         }
 
+        .gift-container.opened .gift-body {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease 0.3s;
+        }
+
         .headset-reveal {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.5);
             opacity: 0;
-            width: 200px;
-            height: 200px;
+            width: 180px;
+            height: 180px;
             transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-            filter: drop-shadow(0 0 30px rgba(254, 205, 211, 0.6));
+            filter: drop-shadow(0 0 25px rgba(255, 105, 180, 0.6));
         }
 
         .gift-container.opened .headset-reveal {
@@ -377,110 +472,20 @@
 
         @keyframes floatHeadset {
             0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-            50% { transform: translate(-50%, -50%) translateY(-10px); }
+            50% { transform: translate(-50%, -50%) translateY(-12px); }
         }
 
-        /* Screen 4: Photo Reveal */
-        .photo-frame {
-            position: relative;
-            width: 280px;
-            height: 380px;
-            border-radius: 140px 140px 20px 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
-            margin: 1rem auto;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease;
+        @keyframes popIn {
+            0% { opacity: 0; transform: rotate(-10deg) scale(0.8); }
+            100% { opacity: 1; transform: rotate(-3deg) scale(1); }
         }
 
-        .photo-frame.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 10s ease;
-        }
-
-        .photo-frame:hover img {
-            transform: scale(1.1);
-        }
-
-        .photo-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 60%;
-            background: linear-gradient(to top, rgba(26, 5, 10, 0.9), transparent);
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 2rem;
-        }
-
-        /* Screen 5: Personal Letter */
-        .letter-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 2.5rem 2rem;
-            max-width: 380px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .typing-line {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            line-height: 1.6;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .typing-line.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Screen 6: Final */
-        .final-text {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            opacity: 0;
-            transform: scale(0.9);
-            transition: all 1s ease;
-        }
-        .final-text.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        .final-sub {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            opacity: 0;
-            transition: opacity 1s ease 0.5s;
-        }
-        .final-sub.visible {
-            opacity: 1;
-        }
-
-        /* Heart Burst */
+        /* ========================================== */
+        /* MICRO-INTERACTIONS                         */
+        /* ========================================== */
         .burst-heart {
             position: absolute;
-            color: var(--blush);
+            color: var(--hot-pink);
             font-size: 20px;
             pointer-events: none;
             animation: burst 1s ease-out forwards;
@@ -490,6 +495,19 @@
         @keyframes burst {
             0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
             100% { transform: translate(-50%, -150%) scale(1.5); opacity: 0; }
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-anim 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-anim {
+            to { transform: scale(4); opacity: 0; }
         }
 
         /* Reduced Motion */
@@ -507,157 +525,156 @@
         <div class="bg-blob blob-2"></div>
         <div class="bg-blob blob-3"></div>
     </div>
-    <div class="grain"></div>
-    <div class="vignette"></div>
     <div id="particles"></div>
 
-    <!-- TRANSITION OVERLAY -->
-    <div class="transition-overlay" id="transitionOverlay"></div>
+    <!-- TRANSITION FLASH -->
+    <div class="transition-flash" id="transitionFlash"></div>
 
     <!-- ========================================== -->
     <!-- SCREEN 1: THE OPENING                      -->
     <!-- ========================================== -->
     <section class="screen active" id="screen1">
-        <h1 class="title-large" id="s1-title1">20 already...?</h1>
-        <p class="subtitle" id="s1-sub1" style="opacity: 0; transition: opacity 1s ease 1s;">That's kinda dangerous, Mommy. ♡</p>
-        <p class="subtitle" id="s1-sub2" style="opacity: 0; transition: opacity 1s ease 2s; margin-top: -1rem;">I made something for you.</p>
-        <button class="btn btn-glow" id="s1-btn" style="opacity: 0; transition: opacity 1s ease 3s;" onclick="transitionTo(2)">
-            Don't be shy →
+        <h1 class="title-large" id="s1-title1">Hey, Mommy... ♡</h1>
+        <p class="subtitle" id="s1-sub1" style="opacity: 0; transition: opacity 1s ease 0.8s;">I made something for you.</p>
+        <p class="subtitle" id="s1-sub2" style="opacity: 0; transition: opacity 1s ease 1.6s; margin-top: -1rem;">And before you ask...<br>yes, you have to open it.</p>
+        <button class="btn btn-glow" id="s1-btn" style="opacity: 0; transition: opacity 1s ease 2.4s;" onclick="transitionTo(2)">
+            Open your surprise ♡
         </button>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 2: THE TEASING LETTER               -->
+    <!-- SCREEN 2: TEASING + POLAROID               -->
     <!-- ========================================== -->
     <section class="screen" id="screen2">
-        <h2 style="font-size: 2rem; color: var(--blush); margin-bottom: 2rem;">To my birthday girl, ♡</h2>
-        
-        <div id="letter-container">
-            <p class="letter-text">Well...<br>Look who's 20 now.</p>
-            <p class="letter-text">I was going to write you a normal birthday message...<br>but honestly,<br>where's the fun in that?</p>
-            <p class="letter-text">So instead, I made you <span class="highlight">this</span>.</p>
-            <p class="letter-text">Don't get too excited, Mommy.<br>I'm only getting started. ♡</p>
-        </div>
+        <div id="letter-container-2">
+            <p class="letter-text">You really thought I'd let your birthday pass<br>without making something for you?</p>
+            
+            <!-- PHOTO 1: Polaroid Style -->
+            <!-- 
+                // HER PHOTO URL 1 
+                Replace src with your direct Imgur link (e.g., https://i.imgur.com/T6WIcZ9.jpg)
+            -->
+            <div class="photo-polaroid" onclick="triggerSparkles(this)" style="animation-delay: 0.5s;">
+                <img src="https://i.imgur.com/T6WIcZ9.jpg" alt="My beautiful girl" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=400&auto=format&fit=crop';">
+                <div class="polaroid-heart">♡</div>
+            </div>
 
+            <p class="letter-text">I know you're already smiling.<br>Don't pretend you're not.</p>
+        </div>
         <button class="btn" id="s2-btn" onclick="transitionTo(3)" style="opacity: 0; margin-top: 1rem;">
-            Continue ↓
+            Keep going →
         </button>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 3: THE GIFT REVEAL                  -->
+    <!-- SCREEN 3: MORE TEASING + BLENDED PHOTO     -->
     <!-- ========================================== -->
-    <section class="screen" id="screen3" style="background: rgba(0,0,0,0.3);">
-        <p class="letter-text visible" style="margin-bottom: 0.5rem;">Okay...</p>
-        <p class="letter-text visible" style="margin-bottom: 2rem;">I suppose I should tell you why I made all of this.</p>
-        <p class="letter-text visible highlight" style="font-size: 1.6rem; margin-bottom: 1rem;">Because I got you something.</p>
+    <section class="screen" id="screen3">
+        <div id="letter-container-3">
+            <p class="letter-text">I could've just bought you a gift...</p>
+            <p class="letter-text highlight">But where's the fun in that?</p>
+            
+            <!-- PHOTO 2: Blended Portrait Style -->
+            <!-- 
+                // HER PHOTO URL 2 
+            -->
+            <div class="photo-blended" id="photo2" onclick="triggerSparkles(this)">
+                <img src="https://i.imgur.com/rX9EMfM.jpg" alt="Pretty girl" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400&auto=format&fit=crop';">
+            </div>
+
+            <p class="letter-text">You're getting spoiled today.<br>Don't get used to it.</p>
+            <p class="letter-text">...Okay, maybe you deserve it.</p>
+        </div>
+        <button class="btn" id="s3-btn" onclick="transitionTo(4)" style="opacity: 0; margin-top: 1rem;">
+            There's more ↓
+        </button>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 4: GIFT REVEAL                      -->
+    <!-- ========================================== -->
+    <section class="screen" id="screen4">
+        <p class="letter-text visible" style="margin-bottom: 0.5rem;">Okay... I got you something. 🎀</p>
+        <p class="letter-text visible" style="margin-bottom: 1.5rem;">And yes, you absolutely have to open it.</p>
 
         <div class="gift-container" id="giftBox" onclick="openGift()">
-            <!-- Inline SVG Gift Box -->
+            <!-- Inline SVG Cute Gift Box -->
             <svg class="gift-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g class="gift-body">
-                    <rect x="15" y="40" width="70" height="50" rx="6" fill="#4a0414"/>
-                    <rect x="15" y="40" width="70" height="50" rx="6" fill="url(#grad1)" opacity="0.8"/>
-                    <rect x="42" y="40" width="16" height="50" fill="#881337"/>
-                    <rect x="15" y="60" width="70" height="8" fill="#881337" opacity="0.5"/>
+                    <rect x="15" y="40" width="70" height="50" rx="6" fill="#ffb6c1"/>
+                    <rect x="15" y="40" width="70" height="50" rx="6" fill="url(#gradPink)" opacity="0.9"/>
+                    <rect x="42" y="40" width="16" height="50" fill="#ff69b4"/>
+                    <rect x="15" y="60" width="70" height="8" fill="#ff69b4" opacity="0.4"/>
                 </g>
                 <g class="gift-lid">
-                    <rect x="10" y="25" width="80" height="18" rx="4" fill="#881337"/>
-                    <rect x="42" y="25" width="16" height="18" fill="#fecdd3"/>
-                    <path d="M50 25 C 40 10, 20 15, 25 25 C 30 35, 45 25, 50 25" fill="#fecdd3"/>
-                    <path d="M50 25 C 60 10, 80 15, 75 25 C 70 35, 55 25, 50 25" fill="#fecdd3"/>
-                    <circle cx="50" cy="25" r="6" fill="#fff1f2"/>
+                    <rect x="10" y="25" width="80" height="18" rx="4" fill="#ff69b4"/>
+                    <rect x="42" y="25" width="16" height="18" fill="#fff0f5"/>
+                    <path d="M50 25 C 40 10, 20 15, 25 25 C 30 35, 45 25, 50 25" fill="#fff0f5"/>
+                    <path d="M50 25 C 60 10, 80 15, 75 25 C 70 35, 55 25, 50 25" fill="#fff0f5"/>
+                    <circle cx="50" cy="25" r="6" fill="#ffe4ec"/>
                 </g>
                 <defs>
-                    <linearGradient id="grad1" x1="0" y1="0" x2="100" y2="100">
-                        <stop offset="0%" stop-color="#881337" stop-opacity="0.8"/>
-                        <stop offset="100%" stop-color="#4a0414" stop-opacity="0.9"/>
+                    <linearGradient id="gradPink" x1="0" y1="0" x2="100" y2="100">
+                        <stop offset="0%" stop-color="#ffc2cd" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#ffb6c1" stop-opacity="0.9"/>
                     </linearGradient>
                 </defs>
             </svg>
 
-            <!-- Inline SVG Modern Headset -->
+            <!-- Inline SVG Modern Headset (Clean & Beautiful) -->
             <svg class="headset-reveal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Headband -->
-                <path d="M20 50 V 40 C 20 22 34 12 50 12 C 66 12 80 22 80 40 V 50" stroke="#fecdd3" stroke-width="5" stroke-linecap="round" fill="none"/>
-                <path d="M20 50 V 40 C 20 22 34 12 50 12 C 66 12 80 22 80 40 V 50" stroke="#fff1f2" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+                <path d="M20 50 V 40 C 20 22 34 12 50 12 C 66 12 80 22 80 40 V 50" stroke="#ff69b4" stroke-width="5" stroke-linecap="round" fill="none"/>
+                <path d="M20 50 V 40 C 20 22 34 12 50 12 C 66 12 80 22 80 40 V 50" stroke="#fff0f5" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.8"/>
                 <!-- Left Earcup -->
-                <rect x="10" y="48" width="18" height="26" rx="9" fill="#881337"/>
-                <rect x="12" y="50" width="14" height="22" rx="7" fill="#4a0414"/>
-                <rect x="14" y="52" width="10" height="18" rx="5" fill="#fecdd3" opacity="0.3"/>
+                <rect x="10" y="48" width="18" height="26" rx="9" fill="#ff69b4"/>
+                <rect x="12" y="50" width="14" height="22" rx="7" fill="#ffb6c1"/>
+                <rect x="14" y="52" width="10" height="18" rx="5" fill="#fff0f5" opacity="0.6"/>
                 <!-- Right Earcup -->
-                <rect x="72" y="48" width="18" height="26" rx="9" fill="#881337"/>
-                <rect x="74" y="50" width="14" height="22" rx="7" fill="#4a0414"/>
-                <rect x="76" y="52" width="10" height="18" rx="5" fill="#fecdd3" opacity="0.3"/>
+                <rect x="72" y="48" width="18" height="26" rx="9" fill="#ff69b4"/>
+                <rect x="74" y="50" width="14" height="22" rx="7" fill="#ffb6c1"/>
+                <rect x="76" y="52" width="10" height="18" rx="5" fill="#fff0f5" opacity="0.6"/>
                 <!-- Cute Heart Detail -->
-                <path d="M78 58 C 78 56, 75 55, 75 58 C 75 61, 78 63, 78 63 C 78 63, 81 61, 81 58 C 81 55, 78 56, 78 58" fill="#fff1f2"/>
+                <path d="M78 58 C 78 56, 75 55, 75 58 C 75 61, 78 63, 78 63 C 78 63, 81 61, 81 58 C 81 55, 78 56, 78 58" fill="#fff0f5"/>
             </svg>
         </div>
 
         <div id="giftText" style="text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.8s ease;">
-            <h3 style="font-size: 1.5rem; color: var(--blush); margin-bottom: 0.5rem;">Your birthday gift 🎧</h3>
+            <h3 style="font-size: 1.5rem; color: var(--text-dark); margin-bottom: 0.5rem;">Your birthday gift 🎧</h3>
             <p class="subtitle" style="font-size: 0.95rem; max-width: 300px;">Something for you to listen to all the songs that remind me of you.</p>
-            <button class="btn" onclick="transitionTo(4)" style="margin-top: 1.5rem;">See who it's from ↓</button>
+            <button class="btn" onclick="transitionTo(5)" style="margin-top: 1.5rem;">Wait, there's one more thing... ↓</button>
         </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 4: PHOTO REVEAL                     -->
-    <!-- ========================================== -->
-    <section class="screen" id="screen4">
-        <p class="letter-text visible" style="margin-bottom: 1rem;">Yeah...</p>
-        <p class="letter-text visible highlight" style="font-size: 1.5rem; margin-bottom: 2rem;">I had to put your face somewhere in here.</p>
-        
-        <div class="photo-frame" id="photoFrame">
-            <!-- 
-                ==========================================
-                // HER PHOTO URL
-                Replace the src below with your direct Imgur image link.
-                IMPORTANT: Use the direct image link (ending in .jpg or .png), 
-                NOT the album link (imgur.com/a/...). 
-                Example: https://i.imgur.com/YOUR_IMAGE_ID.jpg
-                ==========================================
-            -->
-            <img src="https://i.imgur.com/QeblH6r.jpg" 
-                 alt="My beautiful girl" 
-                 onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600&auto=format&fit=crop'; this.style.objectPosition='center top';">
-            
-            <div class="photo-overlay">
-                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream);">
-                    How could I make a birthday website<br>without showing off my pretty girl? ♡
-                </p>
-            </div>
-        </div>
-
-        <button class="btn" onclick="transitionTo(5)" style="margin-top: 2rem;">One last thing... ↓</button>
-    </section>
-
-    <!-- ========================================== -->
-    <!-- SCREEN 5: PERSONAL LETTER                  -->
+    <!-- SCREEN 5: PERSONAL MESSAGE + GLASS PHOTO   -->
     <!-- ========================================== -->
     <section class="screen" id="screen5">
-        <div class="letter-card">
-            <p class="letter-text visible" style="font-size: 1.1rem; color: var(--blush); margin-bottom: 1.5rem;">Okay, enough teasing...</p>
+        <div style="max-width: 380px; width: 100%; text-align: center;">
+            <p class="letter-text visible" style="font-size: 1.3rem; color: var(--hot-pink); margin-bottom: 1.5rem;">Okay, enough teasing...</p>
             
-            <div id="personal-message-container">
+            <div id="personal-message-container" style="margin-bottom: 1.5rem;">
                 <!-- 
-                    ==========================================
                     // PERSONAL MESSAGE
-                    Edit the lines below. Each <p> is a line 
-                    that will fade in sequentially.
-                    ==========================================
+                    Edit the lines below. Each <p> is a line that will fade in sequentially.
                 -->
-                <p class="typing-line">Happy 20th birthday, Mommy. ♡</p>
-                <p class="typing-line">I hope this year gives you everything you're wishing for.</p>
+                <p class="typing-line">I hope this birthday gives you everything you're wishing for.</p>
                 <p class="typing-line">More laughs.<br>More memories.<br>More beautiful moments.</p>
                 <p class="typing-line">And hopefully...<br>a lot more of me. ;)</p>
                 <p class="typing-line">You deserve to feel loved, appreciated, and spoiled today.</p>
-                <p class="typing-line">So here's your little reminder:</p>
                 <p class="typing-line highlight">You're beautiful.<br>You're special.<br>And you're ridiculously easy to love.</p>
             </div>
 
-            <button class="btn" id="s5-btn" onclick="transitionTo(6)" style="margin-top: 2rem; opacity: 0; transition: opacity 1s ease;">
-                Finish ♡
+            <!-- PHOTO 3: Glass Card Style -->
+            <!-- 
+                // HER PHOTO URL 3 
+            -->
+            <div class="photo-glass" id="photo3" onclick="triggerSparkles(this)">
+                <img src="https://i.imgur.com/QeblH6r.jpg" alt="My favorite person" onerror="this.src='https://images.unsplash.com/photo-1524638431109-93d95c968f03?q=80&w=400&auto=format&fit=crop';">
+            </div>
+
+            <button class="btn" id="s5-btn" onclick="transitionTo(6)" style="margin-top: 1.5rem; opacity: 0; transition: opacity 1s ease;">
+                One last thing ♡
             </button>
         </div>
     </section>
@@ -666,13 +683,17 @@
     <!-- SCREEN 6: FINAL SCREEN                     -->
     <!-- ========================================== -->
     <section class="screen" id="screen6">
-        <h1 class="final-text" id="f1">Happy 20th, Mommy. ♡</h1>
-        <p class="final-sub" id="f2">Stay pretty.</p>
-        <p class="final-sub" id="f3" style="transition-delay: 1.5s; font-style: italic; color: var(--blush);">...although I don't think that's going to be a problem.</p>
+        <!-- PHOTO 4: Blended Background -->
+        <!-- 
+            // HER PHOTO URL 4 (Final Background)
+        -->
+        <img class="final-bg-photo" src="https://i.imgur.com/T6WIcZ9.jpg" alt="Background" onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop';">
         
-        <div style="margin-top: 3rem; opacity: 0; animation: fadeIn 2s ease 3s forwards;">
-            <h2 style="font-size: 2rem; color: var(--cream); text-shadow: 0 0 20px rgba(254, 205, 211, 0.5);">I love you. ♡</h2>
-            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text-secondary); margin-top: 1rem;">— From your favorite person</p>
+        <h1 class="title-large final-text" id="f1" style="font-size: 2.8rem;">Happy Birthday,<br>Mommy. ♡</h1>
+        <p class="subtitle final-sub" id="f2" style="font-size: 1.1rem; margin-top: 1rem;">Now go enjoy your gift, pretty girl.</p>
+        
+        <div style="margin-top: 3rem; opacity: 0; animation: fadeIn 2s ease 2s forwards;">
+            <h2 style="font-size: 2.2rem; color: var(--hot-pink); text-shadow: 0 0 20px rgba(255, 105, 180, 0.4);">I love you. ♡</h2>
         </div>
     </section>
 
@@ -689,27 +710,27 @@
         window.addEventListener('load', () => {
             startParticles();
             // Trigger initial text reveals for screen 1
-            setTimeout(() => { document.getElementById('s1-sub1').style.opacity = '1'; }, 1000);
-            setTimeout(() => { document.getElementById('s1-sub2').style.opacity = '1'; }, 2000);
-            setTimeout(() => { document.getElementById('s1-btn').style.opacity = '1'; }, 3000);
+            setTimeout(() => { document.getElementById('s1-sub1').style.opacity = '1'; }, 800);
+            setTimeout(() => { document.getElementById('s1-sub2').style.opacity = '1'; }, 1600);
+            setTimeout(() => { document.getElementById('s1-btn').style.opacity = '1'; }, 2400);
         });
 
         /* ========================================== */
-        /* CINEMATIC TRANSITIONS                      */
+        /* CUTE CINEMATIC TRANSITIONS                 */
         /* ========================================== */
         function transitionTo(targetScreen) {
             if (isTransitioning) return;
             isTransitioning = true;
 
-            const overlay = document.getElementById('transitionOverlay');
+            const flash = document.getElementById('transitionFlash');
             const currentEl = document.getElementById(`screen${currentScreen}`);
             const nextEl = document.getElementById(`screen${targetScreen}`);
 
-            // 1. Create heart burst at button location (or center)
-            createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
+            // 1. Create heart burst at center
+            createHeartBurst(window.innerWidth / 2, window.innerHeight / 2, 10);
 
-            // 2. Fade in overlay
-            overlay.classList.add('active');
+            // 2. Flash overlay
+            flash.classList.add('active');
 
             setTimeout(() => {
                 // 3. Hide current, prepare next
@@ -719,40 +740,61 @@
                 nextEl.classList.add('active');
                 
                 // Screen-specific triggers
-                if (targetScreen === 2) revealLetter();
-                if (targetScreen === 4) setTimeout(() => document.getElementById('photoFrame').classList.add('visible'), 300);
+                if (targetScreen === 2) revealLetter2();
+                if (targetScreen === 3) revealLetter3();
                 if (targetScreen === 5) revealPersonalLetter();
                 if (targetScreen === 6) revealFinal();
 
-                // 4. Fade out overlay
+                // 4. Fade out flash
                 setTimeout(() => {
-                    overlay.classList.remove('active');
+                    flash.classList.remove('active');
                     currentEl.classList.remove('exit');
                     currentScreen = targetScreen;
                     isTransitioning = false;
-                }, 600);
-            }, 600);
+                }, 500);
+            }, 500);
         }
 
         /* ========================================== */
         /* SCREEN 2: LETTER REVEAL                    */
         /* ========================================== */
-        function revealLetter() {
-            const texts = document.querySelectorAll('#letter-container .letter-text');
+        function revealLetter2() {
+            const texts = document.querySelectorAll('#letter-container-2 .letter-text');
             const btn = document.getElementById('s2-btn');
             
             texts.forEach((text, index) => {
                 setTimeout(() => {
                     text.classList.add('visible');
                     if (index === texts.length - 1) {
-                        setTimeout(() => { btn.style.opacity = '1'; }, 800);
+                        setTimeout(() => { btn.style.opacity = '1'; }, 600);
                     }
-                }, index * 1200);
+                }, index * 1000);
             });
         }
 
         /* ========================================== */
-        /* SCREEN 3: GIFT REVEAL                      */
+        /* SCREEN 3: LETTER REVEAL                    */
+        /* ========================================== */
+        function revealLetter3() {
+            const texts = document.querySelectorAll('#letter-container-3 .letter-text');
+            const photo = document.getElementById('photo2');
+            const btn = document.getElementById('s3-btn');
+            
+            texts.forEach((text, index) => {
+                setTimeout(() => {
+                    text.classList.add('visible');
+                    if (index === 1) { // After "But where's the fun in that?"
+                        setTimeout(() => { photo.classList.add('visible'); }, 400);
+                    }
+                    if (index === texts.length - 1) {
+                        setTimeout(() => { btn.style.opacity = '1'; }, 600);
+                    }
+                }, index * 900);
+            });
+        }
+
+        /* ========================================== */
+        /* SCREEN 4: GIFT REVEAL                      */
         /* ========================================== */
         function openGift() {
             const box = document.getElementById('giftBox');
@@ -761,14 +803,15 @@
             if (!box.classList.contains('opened')) {
                 box.classList.add('opened');
                 
-                // Burst of particles
-                for(let i=0; i<15; i++) {
+                // Massive burst of particles
+                for(let i=0; i<20; i++) {
                     setTimeout(() => {
                         createHeartBurst(
-                            window.innerWidth / 2 + (Math.random() - 0.5) * 100, 
-                            window.innerHeight / 2 + (Math.random() - 0.5) * 100
+                            window.innerWidth / 2 + (Math.random() - 0.5) * 150, 
+                            window.innerHeight / 2 + (Math.random() - 0.5) * 150,
+                            1
                         );
-                    }, i * 50);
+                    }, i * 40);
                 }
 
                 setTimeout(() => {
@@ -783,15 +826,19 @@
         /* ========================================== */
         function revealPersonalLetter() {
             const lines = document.querySelectorAll('.typing-line');
+            const photo = document.getElementById('photo3');
             const btn = document.getElementById('s5-btn');
             
             lines.forEach((line, index) => {
                 setTimeout(() => {
                     line.classList.add('visible');
+                    if (index === 2) {
+                        setTimeout(() => { photo.classList.add('visible'); }, 300);
+                    }
                     if (index === lines.length - 1) {
                         setTimeout(() => { btn.style.opacity = '1'; }, 600);
                     }
-                }, index * 800);
+                }, index * 700);
             });
         }
 
@@ -799,32 +846,31 @@
         /* SCREEN 6: FINAL REVEAL                     */
         /* ========================================== */
         function revealFinal() {
-            setTimeout(() => document.getElementById('f1').classList.add('visible'), 500);
-            setTimeout(() => document.getElementById('f2').classList.add('visible'), 1500);
-            setTimeout(() => document.getElementById('f3').classList.add('visible'), 2500);
+            setTimeout(() => document.getElementById('f1').classList.add('visible'), 400);
+            setTimeout(() => document.getElementById('f2').classList.add('visible'), 1200);
             
             // Intensify background hearts for finale
-            setInterval(createFloatingHeart, 300);
+            setInterval(createFloatingHeart, 400);
         }
 
         /* ========================================== */
         /* BACKGROUND PARTICLES                       */
         /* ========================================== */
         function startParticles() {
-            setInterval(createFloatingHeart, 800);
-            setInterval(createSparkle, 600);
+            setInterval(createFloatingHeart, 600);
+            setInterval(createSparkle, 500);
         }
 
         function createFloatingHeart() {
             const container = document.getElementById('particles');
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
-            heart.innerHTML = Math.random() > 0.5 ? '♡' : '❤';
+            heart.innerHTML = Math.random() > 0.5 ? '♡' : '♥';
             
-            const size = Math.random() * 15 + 10;
+            const size = Math.random() * 16 + 10;
             const left = Math.random() * 100;
-            const duration = Math.random() * 6 + 8;
-            const drift = (Math.random() - 0.5) * 100;
+            const duration = Math.random() * 5 + 7;
+            const drift = (Math.random() - 0.5) * 80;
             
             heart.style.fontSize = `${size}px`;
             heart.style.left = `${left}%`;
@@ -840,10 +886,10 @@
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
             
-            const size = Math.random() * 3 + 1;
+            const size = Math.random() * 4 + 2;
             const left = Math.random() * 100;
             const top = Math.random() * 100;
-            const duration = Math.random() * 2 + 1;
+            const duration = Math.random() * 2 + 1.5;
             
             sparkle.style.width = `${size}px`;
             sparkle.style.height = `${size}px`;
@@ -858,52 +904,66 @@
         /* ========================================== */
         /* MICRO-INTERACTIONS                         */
         /* ========================================== */
-        function createHeartBurst(x, y) {
-            for (let i = 0; i < 6; i++) {
+        function createHeartBurst(x, y, count = 6) {
+            for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('burst-heart');
                 heart.innerHTML = '♡';
                 heart.style.left = `${x}px`;
                 heart.style.top = `${y}px`;
-                heart.style.transform = `translate(-50%, -50%) rotate(${(Math.random() - 0.5) * 40}deg)`;
+                heart.style.transform = `translate(-50%, -50%) rotate(${(Math.random() - 0.5) * 60}deg)`;
                 
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 1000);
             }
         }
 
-        // Add burst to all buttons
+        function triggerSparkles(element) {
+            const rect = element.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            
+            // Scale effect
+            element.style.transform = element.classList.contains('photo-polaroid') 
+                ? 'rotate(0deg) scale(1.05)' 
+                : 'scale(1.05)';
+            setTimeout(() => {
+                element.style.transform = element.classList.contains('photo-polaroid') 
+                    ? 'rotate(-3deg)' 
+                    : 'scale(1)';
+            }, 200);
+
+            // Sparkle burst
+            for(let i=0; i<8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('sparkle');
+                sparkle.style.left = `${x + (Math.random() - 0.5) * 100}px`;
+                sparkle.style.top = `${y + (Math.random() - 0.5) * 100}px`;
+                sparkle.style.animationDuration = '0.8s';
+                document.body.appendChild(sparkle);
+                setTimeout(() => sparkle.remove(), 800);
+            }
+        }
+
+        // Add burst and ripple to all buttons
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const rect = btn.getBoundingClientRect();
-                createHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                createHeartBurst(x, y, 8);
+                
+                // Ripple effect
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = `${size}px`;
+                ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+                btn.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
             });
         });
-
-        // Subtle parallax on touch/mouse move
-        let ticking = false;
-        document.addEventListener('mousemove', handleParallax);
-        document.addEventListener('touchmove', handleParallax, { passive: true });
-
-        function handleParallax(e) {
-            if (ticking) return;
-            ticking = true;
-            
-            requestAnimationFrame(() => {
-                const x = (e.clientX || e.touches[0].clientX) / window.innerWidth;
-                const y = (e.clientY || e.touches[0].clientY) / window.innerHeight;
-                
-                const blobs = document.querySelectorAll('.bg-blob');
-                blobs.forEach((blob, index) => {
-                    const speed = (index + 1) * 10;
-                    const xOffset = (0.5 - x) * speed;
-                    const yOffset = (0.5 - y) * speed;
-                    blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-                });
-                
-                ticking = false;
-            });
-        }
 
         // Prevent double-tap zoom
         document.addEventListener('dblclick', function(event) {
@@ -912,7 +972,22 @@
 
         // Add fadeIn keyframe dynamically
         const style = document.createElement('style');
-        style.innerHTML = `@keyframes fadeIn { to { opacity: 1; } }`;
+        style.innerHTML = `
+            .typing-line {
+                font-family: 'Cormorant Garamond', serif;
+                font-size: 1.3rem;
+                line-height: 1.6;
+                color: var(--text-dark);
+                margin-bottom: 0.8rem;
+                opacity: 0;
+                transform: translateY(10px);
+                transition: opacity 0.6s ease, transform 0.6s ease;
+            }
+            .typing-line.visible { opacity: 1; transform: translateY(0); }
+            .final-text, .final-sub { opacity: 0; transform: translateY(20px); transition: all 1s ease; }
+            .final-text.visible, .final-sub.visible { opacity: 1; transform: translateY(0); }
+            @keyframes fadeIn { to { opacity: 1; } }
+        `;
         document.head.appendChild(style);
     </script>
 </body>
