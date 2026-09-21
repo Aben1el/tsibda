@@ -3,89 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday, My Love 💗</title>
+    <meta name="theme-color" content="#2a0a12">
+    <title>For You ♡</title>
     
     <!-- ========================================== -->
     <!-- FONTS                                      -->
     <!-- ========================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         /* ========================================== */
         /* COLORS & VARIABLES                         */
         /* ========================================== */
         :root {
-            --bg-cream: #fff1f2;
+            --bg-dark: #1a050a;
+            --deep-rose: #4a0414;
+            --rose: #881337;
+            --blush: #fecdd3;
             --soft-pink: #ffe4e6;
-            --blush-pink: #fecdd3;
-            --medium-pink: #fda4af;
-            --dark-pink: #be123c;
-            --text-dark: #881337;
-            --text-soft: #9f1239;
-            --white-glass: rgba(255, 255, 255, 0.65);
-            --shadow-soft: 0 8px 32px rgba(190, 18, 60, 0.1);
-            --glow-pink: 0 0 20px rgba(253, 164, 175, 0.6);
+            --cream: #fff1f2;
+            --gold: #fbbf24;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #fff1f2;
+            --text-secondary: #fecdd3;
         }
 
         /* ========================================== */
-        /* RESET & BASE STYLES                        */
+        /* RESET & BASE                               */
         /* ========================================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden; /* Prevent scrolling, we handle it per screen */
+            overflow: hidden;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--soft-pink) 100%);
-            color: var(--text-dark);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
             touch-action: manipulation;
         }
 
         /* ========================================== */
-        /* BACKGROUND ANIMATIONS                      */
+        /* LIVING BACKGROUND                          */
         /* ========================================== */
-        #background-effects {
+        .bg-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-gradient {
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(136, 19, 55, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(254, 205, 211, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(74, 4, 20, 0.8) 0%, var(--bg-dark) 100%);
+            animation: bgPulse 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgPulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: floatBlob 20s infinite ease-in-out;
+        }
+
+        .blob-1 { width: 300px; height: 300px; background: var(--rose); top: -10%; left: -10%; animation-delay: 0s; }
+        .blob-2 { width: 400px; height: 400px; background: var(--deep-rose); bottom: -10%; right: -10%; animation-delay: -5s; }
+        .blob-3 { width: 200px; height: 200px; background: var(--blush); top: 40%; left: 60%; animation-delay: -10s; opacity: 0.2; }
+
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Film Grain Overlay */
+        .grain {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
+            opacity: 0.05;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Vignette */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.6) 100%);
+        }
+
+        /* ========================================== */
+        /* PARTICLES                                  */
+        /* ========================================== */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
             overflow: hidden;
         }
 
-        .floating-heart {
+        .particle {
             position: absolute;
-            bottom: -50px;
-            color: var(--medium-pink);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .heart-particle {
+            color: var(--blush);
+            font-size: 14px;
             opacity: 0;
-            animation: floatUp linear forwards;
-            user-select: none;
+            animation: floatUpHeart linear forwards;
         }
 
         .sparkle {
-            position: absolute;
             background: white;
-            border-radius: 50%;
-            opacity: 0;
+            box-shadow: 0 0 4px white, 0 0 8px var(--blush);
             animation: twinkle ease-in-out forwards;
-            box-shadow: 0 0 4px white;
         }
 
-        @keyframes floatUp {
+        @keyframes floatUpHeart {
             0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
             10% { opacity: 0.6; }
-            90% { opacity: 0.4; }
-            100% { transform: translateY(-110vh) translateX(var(--drift)) scale(1); opacity: 0; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(var(--drift)) scale(1); opacity: 0; }
         }
 
         @keyframes twinkle {
@@ -93,10 +167,320 @@
             50% { opacity: 0.8; transform: scale(1.2); }
         }
 
-        /* Heart burst on click */
+        /* ========================================== */
+        /* SCREEN MANAGEMENT & TRANSITIONS            */
+        /* ========================================== */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            filter: blur(10px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                        filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        .screen::-webkit-scrollbar { display: none; }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: scale(1);
+            filter: blur(0);
+        }
+
+        .screen.exit {
+            opacity: 0;
+            transform: scale(1.05);
+            filter: blur(10px);
+        }
+
+        /* Transition Overlay */
+        .transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, var(--rose) 0%, var(--bg-dark) 100%);
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+        .transition-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* ========================================== */
+        /* TYPOGRAPHY                                 */
+        /* ========================================== */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .title-large {
+            font-size: 3.5rem;
+            background: linear-gradient(to bottom, var(--cream), var(--blush));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(254, 205, 211, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+        }
+
+        .letter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            text-align: center;
+            max-width: 350px;
+            margin: 0 auto 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .letter-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .highlight {
+            color: var(--blush);
+            font-style: italic;
+            font-weight: 600;
+        }
+
+        /* ========================================== */
+        /* UI ELEMENTS                                */
+        /* ========================================== */
+        .btn {
+            background: transparent;
+            color: var(--blush);
+            border: 1px solid rgba(254, 205, 211, 0.3);
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            box-shadow: 0 0 20px rgba(254, 205, 211, 0.1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before, .btn:active::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            background: rgba(254, 205, 211, 0.1);
+        }
+
+        .btn-glow {
+            animation: btnPulse 3s infinite;
+        }
+
+        @keyframes btnPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(254, 205, 211, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(254, 205, 211, 0.3), 0 0 10px rgba(136, 19, 55, 0.5); }
+        }
+
+        /* ========================================== */
+        /* SCREEN SPECIFIC STYLES                     */
+        /* ========================================== */
+        
+        /* Screen 3: Gift */
+        .gift-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 2rem auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .gift-container:active { transform: scale(0.95); }
+
+        .gift-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+
+        .gift-lid {
+            transform-origin: center top;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gift-container.opened .gift-lid {
+            transform: translateY(-30px) rotate(-20deg);
+        }
+
+        .headset-reveal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            width: 200px;
+            height: 200px;
+            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 0 30px rgba(254, 205, 211, 0.6));
+        }
+
+        .gift-container.opened .headset-reveal {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            animation: floatHeadset 4s ease-in-out infinite;
+        }
+
+        @keyframes floatHeadset {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+            50% { transform: translate(-50%, -50%) translateY(-10px); }
+        }
+
+        /* Screen 4: Photo Reveal */
+        .photo-frame {
+            position: relative;
+            width: 280px;
+            height: 380px;
+            border-radius: 140px 140px 20px 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+            margin: 1rem auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .photo-frame.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 10s ease;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(26, 5, 10, 0.9), transparent);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 2rem;
+        }
+
+        /* Screen 5: Personal Letter */
+        .letter-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .typing-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .typing-line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Screen 6: Final */
+        .final-text {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 1s ease;
+        }
+        .final-text.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .final-sub {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            opacity: 0;
+            transition: opacity 1s ease 0.5s;
+        }
+        .final-sub.visible {
+            opacity: 1;
+        }
+
+        /* Heart Burst */
         .burst-heart {
             position: absolute;
-            color: var(--dark-pink);
+            color: var(--blush);
             font-size: 20px;
             pointer-events: none;
             animation: burst 1s ease-out forwards;
@@ -108,451 +492,355 @@
             100% { transform: translate(-50%, -150%) scale(1.5); opacity: 0; }
         }
 
-        /* ========================================== */
-        /* SCREEN MANAGEMENT                          */
-        /* ========================================== */
-        .screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100dvh; /* Dynamic viewport height for mobile */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 1.5rem;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            transform: translateY(20px);
-            z-index: 10;
-            overflow-y: auto; /* Allow scrolling if content is too tall */
-        }
-
-        .screen.active {
-            opacity: 1;
-            pointer-events: all;
-            transform: translateY(0);
-        }
-
-        /* ========================================== */
-        /* TYPOGRAPHY                                 */
-        /* ========================================== */
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        h1 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--dark-pink); }
-        h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-dark); }
-        p {
-            font-size: 1rem;
-            line-height: 1.7;
-            text-align: center;
-            color: var(--text-soft);
-            margin-bottom: 1.5rem;
-            max-width: 400px;
-        }
-
-        /* ========================================== */
-        /* UI ELEMENTS (Buttons, Cards)               */
-        /* ========================================== */
-        .btn {
-            background: linear-gradient(135deg, var(--medium-pink), var(--dark-pink));
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: var(--shadow-soft), var(--glow-pink);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            min-height: 56px; /* Touch-friendly */
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            user-select: none;
-            margin-top: 1rem;
-            animation: heartbeat 2s infinite;
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-            animation: none;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-        }
-
-        .glass-card {
-            background: var(--white-glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 24px;
-            padding: 2rem 1.5rem;
-            box-shadow: var(--shadow-soft);
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* ========================================== */
-        /* SCREEN 3: GIFT REVEAL                      */
-        /* ========================================== */
-        .gift-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 1rem auto 2rem;
-            cursor: pointer;
-        }
-
-        .gift-box-svg {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease, opacity 0.5s ease;
-        }
-
-        .gift-lid {
-            transform-origin: center top;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .gift-container.opened .gift-lid {
-            transform: translateY(-40px) rotate(-15deg);
-        }
-        
-        .gift-container.opened .gift-box-body {
-            transform: scale(0.8);
-            opacity: 0;
-            transition: all 0.5s ease 0.3s;
-        }
-
-        .headset-reveal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.5);
-            opacity: 0;
-            width: 180px;
-            height: 180px;
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-            filter: drop-shadow(0 0 15px rgba(253, 164, 175, 0.8));
-        }
-
-        .gift-container.opened .headset-reveal {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        /* ========================================== */
-        /* SCREEN 4: TYPING MESSAGE                   */
-        /* ========================================== */
-        .typing-text {
-            text-align: left;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            min-height: 150px;
-            white-space: pre-wrap;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            background-color: var(--dark-pink);
-            animation: blink 1s step-end infinite;
-            vertical-align: middle;
-            margin-left: 2px;
-        }
-
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* ========================================== */
-        /* MUSIC TOGGLE                               */
-        /* ========================================== */
-        .music-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            background: var(--white-glass);
-            border: 1px solid rgba(255,255,255,0.8);
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-soft);
-            font-size: 1.2rem;
-            color: var(--dark-pink);
-            transition: transform 0.2s;
-        }
-        .music-toggle:active { transform: scale(0.9); }
-        .music-toggle.playing { animation: pulse-music 2s infinite; }
-
-        @keyframes pulse-music {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(190, 18, 60, 0.2); }
-            50% { box-shadow: 0 0 0 10px rgba(190, 18, 60, 0); }
-        }
-
-        /* ========================================== */
-        /* UTILITY & RESPONSIVE                       */
-        /* ========================================== */
-        .hidden { display: none !important; }
-        
-        /* Desktop adjustments (keep mobile priority) */
-        @media (min-width: 768px) {
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.5rem; }
-            p { font-size: 1.15rem; }
-            .glass-card { padding: 3rem 2.5rem; }
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BACKGROUND EFFECTS CONTAINER -->
-    <div id="background-effects"></div>
+    <!-- BACKGROUND LAYERS -->
+    <div class="bg-layer bg-gradient"></div>
+    <div class="bg-layer">
+        <div class="bg-blob blob-1"></div>
+        <div class="bg-blob blob-2"></div>
+        <div class="bg-blob blob-3"></div>
+    </div>
+    <div class="grain"></div>
+    <div class="vignette"></div>
+    <div id="particles"></div>
 
-    <!-- MUSIC TOGGLE (Optional) -->
-    <div class="music-toggle" id="musicBtn" title="Toggle Music">♪</div>
-    <!-- 
-      MUSIC SETUP INSTRUCTIONS:
-      1. Add an audio file to your GitHub repo (e.g., 'song.mp3').
-      2. Uncomment the line below and change 'song.mp3' to your file name.
-      3. The music button will automatically play/pause it.
-    -->
-    <!-- <audio id="bgMusic" loop src="song.mp3"></audio> -->
+    <!-- TRANSITION OVERLAY -->
+    <div class="transition-overlay" id="transitionOverlay"></div>
 
     <!-- ========================================== -->
     <!-- SCREEN 1: THE OPENING                      -->
     <!-- ========================================== -->
     <section class="screen active" id="screen1">
-        <h1>Hey you... 💗</h1>
-        <p>I made a little something for you.</p>
-        <button class="btn" onclick="goToScreen(2)">Open your surprise 💕</button>
+        <h1 class="title-large" id="s1-title1">20 already...?</h1>
+        <p class="subtitle" id="s1-sub1" style="opacity: 0; transition: opacity 1s ease 1s;">That's kinda dangerous, Mommy. ♡</p>
+        <p class="subtitle" id="s1-sub2" style="opacity: 0; transition: opacity 1s ease 2s; margin-top: -1rem;">I made something for you.</p>
+        <button class="btn btn-glow" id="s1-btn" style="opacity: 0; transition: opacity 1s ease 3s;" onclick="transitionTo(2)">
+            Don't be shy →
+        </button>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 2: BIRTHDAY MESSAGE                 -->
+    <!-- SCREEN 2: THE TEASING LETTER               -->
     <!-- ========================================== -->
     <section class="screen" id="screen2">
-        <div class="glass-card">
-            <h2>Happy Birthday,<br>my love 💗</h2>
-            <p>
-                Today is all about you.<br>
-                So I made you a tiny little corner of the internet<br>
-                just to remind you how special you are to me.
-            </p>
-            <button class="btn" onclick="goToScreen(3)">There's more... →</button>
+        <h2 style="font-size: 2rem; color: var(--blush); margin-bottom: 2rem;">To my birthday girl, ♡</h2>
+        
+        <div id="letter-container">
+            <p class="letter-text">Well...<br>Look who's 20 now.</p>
+            <p class="letter-text">I was going to write you a normal birthday message...<br>but honestly,<br>where's the fun in that?</p>
+            <p class="letter-text">So instead, I made you <span class="highlight">this</span>.</p>
+            <p class="letter-text">Don't get too excited, Mommy.<br>I'm only getting started. ♡</p>
         </div>
+
+        <button class="btn" id="s2-btn" onclick="transitionTo(3)" style="opacity: 0; margin-top: 1rem;">
+            Continue ↓
+        </button>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 3: THE GIFT REVEAL 🎧               -->
+    <!-- SCREEN 3: THE GIFT REVEAL                  -->
     <!-- ========================================== -->
-    <section class="screen" id="screen3">
-        <h2>Okay... I may have gotten you something 🎁</h2>
-        
+    <section class="screen" id="screen3" style="background: rgba(0,0,0,0.3);">
+        <p class="letter-text visible" style="margin-bottom: 0.5rem;">Okay...</p>
+        <p class="letter-text visible" style="margin-bottom: 2rem;">I suppose I should tell you why I made all of this.</p>
+        <p class="letter-text visible highlight" style="font-size: 1.6rem; margin-bottom: 1rem;">Because I got you something.</p>
+
         <div class="gift-container" id="giftBox" onclick="openGift()">
             <!-- Inline SVG Gift Box -->
-            <svg class="gift-box-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Box Body -->
-                <g class="gift-box-body">
-                    <rect x="15" y="40" width="70" height="50" rx="4" fill="#fda4af"/>
-                    <rect x="42" y="40" width="16" height="50" fill="#be123c"/>
-                    <rect x="15" y="60" width="70" height="8" fill="#be123c" opacity="0.3"/>
+            <svg class="gift-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g class="gift-body">
+                    <rect x="15" y="40" width="70" height="50" rx="6" fill="#4a0414"/>
+                    <rect x="15" y="40" width="70" height="50" rx="6" fill="url(#grad1)" opacity="0.8"/>
+                    <rect x="42" y="40" width="16" height="50" fill="#881337"/>
+                    <rect x="15" y="60" width="70" height="8" fill="#881337" opacity="0.5"/>
                 </g>
-                <!-- Box Lid -->
                 <g class="gift-lid">
-                    <rect x="10" y="25" width="80" height="18" rx="4" fill="#fecdd3"/>
-                    <rect x="42" y="25" width="16" height="18" fill="#be123c"/>
-                    <!-- Bow -->
-                    <path d="M50 25 C 40 10, 20 15, 25 25 C 30 35, 45 25, 50 25" fill="#be123c"/>
-                    <path d="M50 25 C 60 10, 80 15, 75 25 C 70 35, 55 25, 50 25" fill="#be123c"/>
-                    <circle cx="50" cy="25" r="6" fill="#9f1239"/>
+                    <rect x="10" y="25" width="80" height="18" rx="4" fill="#881337"/>
+                    <rect x="42" y="25" width="16" height="18" fill="#fecdd3"/>
+                    <path d="M50 25 C 40 10, 20 15, 25 25 C 30 35, 45 25, 50 25" fill="#fecdd3"/>
+                    <path d="M50 25 C 60 10, 80 15, 75 25 C 70 35, 55 25, 50 25" fill="#fecdd3"/>
+                    <circle cx="50" cy="25" r="6" fill="#fff1f2"/>
                 </g>
+                <defs>
+                    <linearGradient id="grad1" x1="0" y1="0" x2="100" y2="100">
+                        <stop offset="0%" stop-color="#881337" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#4a0414" stop-opacity="0.9"/>
+                    </linearGradient>
+                </defs>
             </svg>
 
-            <!-- Inline SVG Headphones (Hidden initially) -->
+            <!-- Inline SVG Modern Headset -->
             <svg class="headset-reveal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <!-- Headband -->
-                <path d="M20 50 V 40 C 20 25 32 15 50 15 C 68 15 80 25 80 40 V 50" stroke="#be123c" stroke-width="6" stroke-linecap="round" fill="none"/>
-                <path d="M20 50 V 40 C 20 25 32 15 50 15 C 68 15 80 25 80 40 V 50" stroke="#fda4af" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                <path d="M20 50 V 40 C 20 22 34 12 50 12 C 66 12 80 22 80 40 V 50" stroke="#fecdd3" stroke-width="5" stroke-linecap="round" fill="none"/>
+                <path d="M20 50 V 40 C 20 22 34 12 50 12 C 66 12 80 22 80 40 V 50" stroke="#fff1f2" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
                 <!-- Left Earcup -->
-                <rect x="12" y="48" width="16" height="24" rx="8" fill="#be123c"/>
-                <rect x="14" y="50" width="12" height="20" rx="6" fill="#fecdd3"/>
+                <rect x="10" y="48" width="18" height="26" rx="9" fill="#881337"/>
+                <rect x="12" y="50" width="14" height="22" rx="7" fill="#4a0414"/>
+                <rect x="14" y="52" width="10" height="18" rx="5" fill="#fecdd3" opacity="0.3"/>
                 <!-- Right Earcup -->
-                <rect x="72" y="48" width="16" height="24" rx="8" fill="#be123c"/>
-                <rect x="74" y="50" width="12" height="20" rx="6" fill="#fecdd3"/>
+                <rect x="72" y="48" width="18" height="26" rx="9" fill="#881337"/>
+                <rect x="74" y="50" width="14" height="22" rx="7" fill="#4a0414"/>
+                <rect x="76" y="52" width="10" height="18" rx="5" fill="#fecdd3" opacity="0.3"/>
                 <!-- Cute Heart Detail -->
                 <path d="M78 58 C 78 56, 75 55, 75 58 C 75 61, 78 63, 78 63 C 78 63, 81 61, 81 58 C 81 55, 78 56, 78 58" fill="#fff1f2"/>
             </svg>
         </div>
 
-        <div id="giftText" class="hidden" style="text-align: center; max-width: 350px;">
-            <h3 style="color: var(--dark-pink); margin-bottom: 0.5rem;">🎧 A little something for you.</h3>
-            <p style="font-size: 0.95rem;">I hope you love it as much as I loved choosing it for you.</p>
-            <button class="btn" onclick="goToScreen(4)" style="animation: none; margin-top: 1.5rem;">Read my letter 💌</button>
+        <div id="giftText" style="text-align: center; opacity: 0; transform: translateY(20px); transition: all 0.8s ease;">
+            <h3 style="font-size: 1.5rem; color: var(--blush); margin-bottom: 0.5rem;">Your birthday gift 🎧</h3>
+            <p class="subtitle" style="font-size: 0.95rem; max-width: 300px;">Something for you to listen to all the songs that remind me of you.</p>
+            <button class="btn" onclick="transitionTo(4)" style="margin-top: 1.5rem;">See who it's from ↓</button>
         </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 4: PERSONAL MESSAGE 💌              -->
+    <!-- SCREEN 4: PHOTO REVEAL                     -->
     <!-- ========================================== -->
     <section class="screen" id="screen4">
-        <div class="glass-card">
-            <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">To my favorite person,</h2>
-            <div class="typing-text" id="typingContainer">
-                <span id="typedText"></span><span class="cursor"></span>
+        <p class="letter-text visible" style="margin-bottom: 1rem;">Yeah...</p>
+        <p class="letter-text visible highlight" style="font-size: 1.5rem; margin-bottom: 2rem;">I had to put your face somewhere in here.</p>
+        
+        <div class="photo-frame" id="photoFrame">
+            <!-- 
+                ==========================================
+                // HER PHOTO URL
+                Replace the src below with your direct Imgur image link.
+                IMPORTANT: Use the direct image link (ending in .jpg or .png), 
+                NOT the album link (imgur.com/a/...). 
+                Example: https://i.imgur.com/YOUR_IMAGE_ID.jpg
+                ==========================================
+            -->
+            <img src="https://i.imgur.com/QeblH6r.jpg" 
+                 alt="My beautiful girl" 
+                 onerror="this.src='https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=600&auto=format&fit=crop'; this.style.objectPosition='center top';">
+            
+            <div class="photo-overlay">
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-style: italic; color: var(--cream);">
+                    How could I make a birthday website<br>without showing off my pretty girl? ♡
+                </p>
             </div>
-            <button class="btn hidden" id="finalBtn" onclick="goToScreen(5)" style="animation: none; margin-top: 2rem;">One last thing... ✨</button>
+        </div>
+
+        <button class="btn" onclick="transitionTo(5)" style="margin-top: 2rem;">One last thing... ↓</button>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 5: PERSONAL LETTER                  -->
+    <!-- ========================================== -->
+    <section class="screen" id="screen5">
+        <div class="letter-card">
+            <p class="letter-text visible" style="font-size: 1.1rem; color: var(--blush); margin-bottom: 1.5rem;">Okay, enough teasing...</p>
+            
+            <div id="personal-message-container">
+                <!-- 
+                    ==========================================
+                    // PERSONAL MESSAGE
+                    Edit the lines below. Each <p> is a line 
+                    that will fade in sequentially.
+                    ==========================================
+                -->
+                <p class="typing-line">Happy 20th birthday, Mommy. ♡</p>
+                <p class="typing-line">I hope this year gives you everything you're wishing for.</p>
+                <p class="typing-line">More laughs.<br>More memories.<br>More beautiful moments.</p>
+                <p class="typing-line">And hopefully...<br>a lot more of me. ;)</p>
+                <p class="typing-line">You deserve to feel loved, appreciated, and spoiled today.</p>
+                <p class="typing-line">So here's your little reminder:</p>
+                <p class="typing-line highlight">You're beautiful.<br>You're special.<br>And you're ridiculously easy to love.</p>
+            </div>
+
+            <button class="btn" id="s5-btn" onclick="transitionTo(6)" style="margin-top: 2rem; opacity: 0; transition: opacity 1s ease;">
+                Finish ♡
+            </button>
         </div>
     </section>
 
     <!-- ========================================== -->
-    <!-- SCREEN 5: FINAL SURPRISE                   -->
+    <!-- SCREEN 6: FINAL SCREEN                     -->
     <!-- ========================================== -->
-    <section class="screen" id="screen5">
-        <h1 style="font-size: 2.5rem; animation: heartbeat 2s infinite;">Happy Birthday,<br>beautiful. 💗</h1>
-        <p style="margin-top: 1rem; font-size: 1.1rem;">Here's to another year of you.</p>
-        <p style="margin-top: 3rem; font-size: 0.9rem; opacity: 0.8; font-style: italic;">
-            Made with love, just for you. ♡
-        </p>
+    <section class="screen" id="screen6">
+        <h1 class="final-text" id="f1">Happy 20th, Mommy. ♡</h1>
+        <p class="final-sub" id="f2">Stay pretty.</p>
+        <p class="final-sub" id="f3" style="transition-delay: 1.5s; font-style: italic; color: var(--blush);">...although I don't think that's going to be a problem.</p>
+        
+        <div style="margin-top: 3rem; opacity: 0; animation: fadeIn 2s ease 3s forwards;">
+            <h2 style="font-size: 2rem; color: var(--cream); text-shadow: 0 0 20px rgba(254, 205, 211, 0.5);">I love you. ♡</h2>
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--text-secondary); margin-top: 1rem;">— From your favorite person</p>
+        </div>
     </section>
 
     <script>
         /* ========================================== */
-        /* CONFIGURATION & EDITABLE TEXT              */
-        /* ========================================== */
-        
-        // EDIT YOUR PERSONAL MESSAGE HERE
-        const personalMessage = `I hope this birthday brings you as much happiness as you bring into my life.\n\nYou deserve beautiful things, beautiful moments, and all the love in the world.\n\nThank you for being you.\n\nHappy Birthday, ❤️`;
-
-        /* ========================================== */
-        /* STATE MANAGEMENT                           */
+        /* STATE & CONFIGURATION                      */
         /* ========================================== */
         let currentScreen = 1;
-        let isTyping = false;
+        let isTransitioning = false;
 
         /* ========================================== */
-        /* NAVIGATION                                 */
+        /* INITIALIZATION                             */
         /* ========================================== */
-        function goToScreen(screenNum) {
-            // Hide current
-            document.getElementById(`screen${currentScreen}`).classList.remove('active');
-            
-            // Small delay for smooth transition
+        window.addEventListener('load', () => {
+            startParticles();
+            // Trigger initial text reveals for screen 1
+            setTimeout(() => { document.getElementById('s1-sub1').style.opacity = '1'; }, 1000);
+            setTimeout(() => { document.getElementById('s1-sub2').style.opacity = '1'; }, 2000);
+            setTimeout(() => { document.getElementById('s1-btn').style.opacity = '1'; }, 3000);
+        });
+
+        /* ========================================== */
+        /* CINEMATIC TRANSITIONS                      */
+        /* ========================================== */
+        function transitionTo(targetScreen) {
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            const overlay = document.getElementById('transitionOverlay');
+            const currentEl = document.getElementById(`screen${currentScreen}`);
+            const nextEl = document.getElementById(`screen${targetScreen}`);
+
+            // 1. Create heart burst at button location (or center)
+            createHeartBurst(window.innerWidth / 2, window.innerHeight / 2);
+
+            // 2. Fade in overlay
+            overlay.classList.add('active');
+
             setTimeout(() => {
-                currentScreen = screenNum;
-                const nextScreen = document.getElementById(`screen${currentScreen}`);
-                nextScreen.classList.add('active');
+                // 3. Hide current, prepare next
+                currentEl.classList.remove('active');
+                currentEl.classList.add('exit');
                 
-                // Trigger specific screen logic
-                if (currentScreen === 4 && !isTyping) {
-                    startTypingEffect();
-                }
-                if (currentScreen === 5) {
-                    intensifyHearts();
-                }
-            }, 400);
+                nextEl.classList.add('active');
+                
+                // Screen-specific triggers
+                if (targetScreen === 2) revealLetter();
+                if (targetScreen === 4) setTimeout(() => document.getElementById('photoFrame').classList.add('visible'), 300);
+                if (targetScreen === 5) revealPersonalLetter();
+                if (targetScreen === 6) revealFinal();
+
+                // 4. Fade out overlay
+                setTimeout(() => {
+                    overlay.classList.remove('active');
+                    currentEl.classList.remove('exit');
+                    currentScreen = targetScreen;
+                    isTransitioning = false;
+                }, 600);
+            }, 600);
         }
 
         /* ========================================== */
-        /* GIFT REVEAL LOGIC                          */
+        /* SCREEN 2: LETTER REVEAL                    */
+        /* ========================================== */
+        function revealLetter() {
+            const texts = document.querySelectorAll('#letter-container .letter-text');
+            const btn = document.getElementById('s2-btn');
+            
+            texts.forEach((text, index) => {
+                setTimeout(() => {
+                    text.classList.add('visible');
+                    if (index === texts.length - 1) {
+                        setTimeout(() => { btn.style.opacity = '1'; }, 800);
+                    }
+                }, index * 1200);
+            });
+        }
+
+        /* ========================================== */
+        /* SCREEN 3: GIFT REVEAL                      */
         /* ========================================== */
         function openGift() {
-            const giftBox = document.getElementById('giftBox');
-            const giftText = document.getElementById('giftText');
+            const box = document.getElementById('giftBox');
+            const text = document.getElementById('giftText');
             
-            if (!giftBox.classList.contains('opened')) {
-                giftBox.classList.add('opened');
-                createHeartBurst(window.innerWidth / 2, window.innerHeight / 2 - 50);
+            if (!box.classList.contains('opened')) {
+                box.classList.add('opened');
                 
-                // Show text after animation
-                setTimeout(() => {
-                    giftText.classList.remove('hidden');
-                    giftText.style.animation = 'fadeIn 1s ease forwards';
-                }, 800);
-            }
-        }
-
-        /* ========================================== */
-        /* TYPING EFFECT                              */
-        /* ========================================== */
-        function startTypingEffect() {
-            isTyping = true;
-            const element = document.getElementById('typedText');
-            const cursor = document.querySelector('.cursor');
-            const finalBtn = document.getElementById('finalBtn');
-            let index = 0;
-            
-            // Clear previous
-            element.textContent = '';
-            finalBtn.classList.add('hidden');
-
-            function type() {
-                if (index < personalMessage.length) {
-                    element.textContent += personalMessage.charAt(index);
-                    index++;
-                    setTimeout(type, 40); // Typing speed (lower = faster)
-                } else {
-                    cursor.style.display = 'none';
+                // Burst of particles
+                for(let i=0; i<15; i++) {
                     setTimeout(() => {
-                        finalBtn.classList.remove('hidden');
-                        finalBtn.style.animation = 'fadeIn 1s ease forwards';
-                    }, 500);
+                        createHeartBurst(
+                            window.innerWidth / 2 + (Math.random() - 0.5) * 100, 
+                            window.innerHeight / 2 + (Math.random() - 0.5) * 100
+                        );
+                    }, i * 50);
                 }
+
+                setTimeout(() => {
+                    text.style.opacity = '1';
+                    text.style.transform = 'translateY(0)';
+                }, 600);
             }
-            type();
         }
 
         /* ========================================== */
-        /* BACKGROUND ANIMATIONS                      */
+        /* SCREEN 5: PERSONAL LETTER REVEAL           */
         /* ========================================== */
-        const bgContainer = document.getElementById('background-effects');
-        
-        function createFloatingHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.innerHTML = '❤';
+        function revealPersonalLetter() {
+            const lines = document.querySelectorAll('.typing-line');
+            const btn = document.getElementById('s5-btn');
             
-            // Randomize properties
-            const size = Math.random() * 20 + 10; // 10px to 30px
-            const left = Math.random() * 100; // 0% to 100%
-            const duration = Math.random() * 5 + 6; // 6s to 11s
-            const drift = (Math.random() - 0.5) * 100; // -50px to 50px
+            lines.forEach((line, index) => {
+                setTimeout(() => {
+                    line.classList.add('visible');
+                    if (index === lines.length - 1) {
+                        setTimeout(() => { btn.style.opacity = '1'; }, 600);
+                    }
+                }, index * 800);
+            });
+        }
+
+        /* ========================================== */
+        /* SCREEN 6: FINAL REVEAL                     */
+        /* ========================================== */
+        function revealFinal() {
+            setTimeout(() => document.getElementById('f1').classList.add('visible'), 500);
+            setTimeout(() => document.getElementById('f2').classList.add('visible'), 1500);
+            setTimeout(() => document.getElementById('f3').classList.add('visible'), 2500);
+            
+            // Intensify background hearts for finale
+            setInterval(createFloatingHeart, 300);
+        }
+
+        /* ========================================== */
+        /* BACKGROUND PARTICLES                       */
+        /* ========================================== */
+        function startParticles() {
+            setInterval(createFloatingHeart, 800);
+            setInterval(createSparkle, 600);
+        }
+
+        function createFloatingHeart() {
+            const container = document.getElementById('particles');
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = Math.random() > 0.5 ? '♡' : '❤';
+            
+            const size = Math.random() * 15 + 10;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 6 + 8;
+            const drift = (Math.random() - 0.5) * 100;
             
             heart.style.fontSize = `${size}px`;
             heart.style.left = `${left}%`;
             heart.style.animationDuration = `${duration}s`;
             heart.style.setProperty('--drift', `${drift}px`);
             
-            bgContainer.appendChild(heart);
-            
-            // Cleanup
-            setTimeout(() => {
-                heart.remove();
-            }, duration * 1000);
+            container.appendChild(heart);
+            setTimeout(() => heart.remove(), duration * 1000);
         }
 
         function createSparkle() {
+            const container = document.getElementById('particles');
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
             
-            const size = Math.random() * 4 + 2;
+            const size = Math.random() * 3 + 1;
             const left = Math.random() * 100;
             const top = Math.random() * 100;
             const duration = Math.random() * 2 + 1;
@@ -563,93 +851,69 @@
             sparkle.style.top = `${top}%`;
             sparkle.style.animationDuration = `${duration}s`;
             
-            bgContainer.appendChild(sparkle);
-            
-            setTimeout(() => {
-                sparkle.remove();
-            }, duration * 1000);
-        }
-
-        // Continuous background generation
-        setInterval(createFloatingHeart, 800);
-        setInterval(createSparkle, 400);
-
-        function intensifyHearts() {
-            // For the final screen, add more hearts
-            setInterval(createFloatingHeart, 300);
+            container.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), duration * 1000);
         }
 
         /* ========================================== */
-        /* INTERACTIVE HEART BURST                    */
+        /* MICRO-INTERACTIONS                         */
         /* ========================================== */
         function createHeartBurst(x, y) {
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 6; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('burst-heart');
-                heart.innerHTML = '💖';
+                heart.innerHTML = '♡';
                 heart.style.left = `${x}px`;
                 heart.style.top = `${y}px`;
-                
-                // Randomize burst direction slightly
-                const randomX = (Math.random() - 0.5) * 60;
-                heart.style.transform = `translate(calc(-50% + ${randomX}px), -50%)`;
+                heart.style.transform = `translate(-50%, -50%) rotate(${(Math.random() - 0.5) * 40}deg)`;
                 
                 document.body.appendChild(heart);
-                
                 setTimeout(() => heart.remove(), 1000);
             }
         }
 
-        // Add burst effect to all buttons on click/touch
+        // Add burst to all buttons
         document.querySelectorAll('.btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const rect = btn.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-                createHeartBurst(x, y);
+                createHeartBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
             });
         });
 
-        /* ========================================== */
-        /* MUSIC TOGGLE LOGIC                         */
-        /* ========================================== */
-        const musicBtn = document.getElementById('musicBtn');
-        const bgMusic = document.getElementById('bgMusic'); // Will be undefined if commented out
+        // Subtle parallax on touch/mouse move
+        let ticking = false;
+        document.addEventListener('mousemove', handleParallax);
+        document.addEventListener('touchmove', handleParallax, { passive: true });
 
-        if (bgMusic) {
-            musicBtn.addEventListener('click', () => {
-                if (bgMusic.paused) {
-                    bgMusic.play();
-                    musicBtn.classList.add('playing');
-                    musicBtn.textContent = '♫';
-                } else {
-                    bgMusic.pause();
-                    musicBtn.classList.remove('playing');
-                    musicBtn.textContent = '♪';
-                }
+        function handleParallax(e) {
+            if (ticking) return;
+            ticking = true;
+            
+            requestAnimationFrame(() => {
+                const x = (e.clientX || e.touches[0].clientX) / window.innerWidth;
+                const y = (e.clientY || e.touches[0].clientY) / window.innerHeight;
+                
+                const blobs = document.querySelectorAll('.bg-blob');
+                blobs.forEach((blob, index) => {
+                    const speed = (index + 1) * 10;
+                    const xOffset = (0.5 - x) * speed;
+                    const yOffset = (0.5 - y) * speed;
+                    blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+                });
+                
+                ticking = false;
             });
-        } else {
-            // Hide music button if no audio element is present
-            musicBtn.style.display = 'none';
         }
 
-        /* ========================================== */
-        /* CSS ANIMATION HELPERS                      */
-        /* ========================================== */
-        const styleSheet = document.createElement("style");
-        styleSheet.innerText = `
-            @keyframes fadeIn {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-        `;
-        document.head.appendChild(styleSheet);
-
-        // Prevent double-tap zoom on mobile
+        // Prevent double-tap zoom
         document.addEventListener('dblclick', function(event) {
             event.preventDefault();
         }, { passive: false });
 
+        // Add fadeIn keyframe dynamically
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fadeIn { to { opacity: 1; } }`;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
