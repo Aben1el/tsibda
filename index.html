@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday, My Love 💗</title>
+    
+    <!-- ========================================== -->
+    <!-- FONTS                                      -->
+    <!-- ========================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================== */
+        /* COLORS & VARIABLES                         */
+        /* ========================================== */
+        :root {
+            --bg-cream: #fff1f2;
+            --soft-pink: #ffe4e6;
+            --blush-pink: #fecdd3;
+            --medium-pink: #fda4af;
+            --dark-pink: #be123c;
+            --text-dark: #881337;
+            --text-soft: #9f1239;
+            --white-glass: rgba(255, 255, 255, 0.65);
+            --shadow-soft: 0 8px 32px rgba(190, 18, 60, 0.1);
+            --glow-pink: 0 0 20px rgba(253, 164, 175, 0.6);
+        }
+
+        /* ========================================== */
+        /* RESET & BASE STYLES                        */
+        /* ========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Prevent scrolling, we handle it per screen */
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--bg-cream) 0%, var(--soft-pink) 100%);
+            color: var(--text-dark);
+            touch-action: manipulation;
+        }
+
+        /* ========================================== */
+        /* BACKGROUND ANIMATIONS                      */
+        /* ========================================== */
+        #background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            color: var(--medium-pink);
+            opacity: 0;
+            animation: floatUp linear forwards;
+            user-select: none;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle ease-in-out forwards;
+            box-shadow: 0 0 4px white;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-110vh) translateX(var(--drift)) scale(1); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 0.8; transform: scale(1.2); }
+        }
+
+        /* Heart burst on click */
+        .burst-heart {
+            position: absolute;
+            color: var(--dark-pink);
+            font-size: 20px;
+            pointer-events: none;
+            animation: burst 1s ease-out forwards;
+            z-index: 100;
+        }
+
+        @keyframes burst {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -150%) scale(1.5); opacity: 0; }
+        }
+
+        /* ========================================== */
+        /* SCREEN MANAGEMENT                          */
+        /* ========================================== */
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100dvh; /* Dynamic viewport height for mobile */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+            z-index: 10;
+            overflow-y: auto; /* Allow scrolling if content is too tall */
+        }
+
+        .screen.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        /* ========================================== */
+        /* TYPOGRAPHY                                 */
+        /* ========================================== */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--dark-pink); }
+        h2 { font-size: 1.8rem; margin-bottom: 1rem; color: var(--text-dark); }
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            text-align: center;
+            color: var(--text-soft);
+            margin-bottom: 1.5rem;
+            max-width: 400px;
+        }
+
+        /* ========================================== */
+        /* UI ELEMENTS (Buttons, Cards)               */
+        /* ========================================== */
+        .btn {
+            background: linear-gradient(135deg, var(--medium-pink), var(--dark-pink));
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft), var(--glow-pink);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            min-height: 56px; /* Touch-friendly */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            user-select: none;
+            margin-top: 1rem;
+            animation: heartbeat 2s infinite;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            animation: none;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .glass-card {
+            background: var(--white-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            padding: 2rem 1.5rem;
+            box-shadow: var(--shadow-soft);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* ========================================== */
+        /* SCREEN 3: GIFT REVEAL                      */
+        /* ========================================== */
+        .gift-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 1rem auto 2rem;
+            cursor: pointer;
+        }
+
+        .gift-box-svg {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .gift-lid {
+            transform-origin: center top;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gift-container.opened .gift-lid {
+            transform: translateY(-40px) rotate(-15deg);
+        }
+        
+        .gift-container.opened .gift-box-body {
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.5s ease 0.3s;
+        }
+
+        .headset-reveal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            opacity: 0;
+            width: 180px;
+            height: 180px;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 0 15px rgba(253, 164, 175, 0.8));
+        }
+
+        .gift-container.opened .headset-reveal {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* ========================================== */
+        /* SCREEN 4: TYPING MESSAGE                   */
+        /* ========================================== */
+        .typing-text {
+            text-align: left;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            min-height: 150px;
+            white-space: pre-wrap;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: var(--dark-pink);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ========================================== */
+        /* MUSIC TOGGLE                               */
+        /* ========================================== */
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: var(--white-glass);
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            font-size: 1.2rem;
+            color: var(--dark-pink);
+            transition: transform 0.2s;
+        }
+        .music-toggle:active { transform: scale(0.9); }
+        .music-toggle.playing { animation: pulse-music 2s infinite; }
+
+        @keyframes pulse-music {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(190, 18, 60, 0.2); }
+            50% { box-shadow: 0 0 0 10px rgba(190, 18, 60, 0); }
+        }
+
+        /* ========================================== */
+        /* UTILITY & RESPONSIVE                       */
+        /* ========================================== */
+        .hidden { display: none !important; }
+        
+        /* Desktop adjustments (keep mobile priority) */
+        @media (min-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            p { font-size: 1.15rem; }
+            .glass-card { padding: 3rem 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BACKGROUND EFFECTS CONTAINER -->
+    <div id="background-effects"></div>
+
+    <!-- MUSIC TOGGLE (Optional) -->
+    <div class="music-toggle" id="musicBtn" title="Toggle Music">♪</div>
+    <!-- 
+      MUSIC SETUP INSTRUCTIONS:
+      1. Add an audio file to your GitHub repo (e.g., 'song.mp3').
+      2. Uncomment the line below and change 'song.mp3' to your file name.
+      3. The music button will automatically play/pause it.
+    -->
+    <!-- <audio id="bgMusic" loop src="song.mp3"></audio> -->
+
+    <!-- ========================================== -->
+    <!-- SCREEN 1: THE OPENING                      -->
+    <!-- ========================================== -->
+    <section class="screen active" id="screen1">
+        <h1>Hey you... 💗</h1>
+        <p>I made a little something for you.</p>
+        <button class="btn" onclick="goToScreen(2)">Open your surprise 💕</button>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 2: BIRTHDAY MESSAGE                 -->
+    <!-- ========================================== -->
+    <section class="screen" id="screen2">
+        <div class="glass-card">
+            <h2>Happy Birthday,<br>my love 💗</h2>
+            <p>
+                Today is all about you.<br>
+                So I made you a tiny little corner of the internet<br>
+                just to remind you how special you are to me.
+            </p>
+            <button class="btn" onclick="goToScreen(3)">There's more... →</button>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 3: THE GIFT REVEAL 🎧               -->
+    <!-- ========================================== -->
+    <section class="screen" id="screen3">
+        <h2>Okay... I may have gotten you something 🎁</h2>
+        
+        <div class="gift-container" id="giftBox" onclick="openGift()">
+            <!-- Inline SVG Gift Box -->
+            <svg class="gift-box-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Box Body -->
+                <g class="gift-box-body">
+                    <rect x="15" y="40" width="70" height="50" rx="4" fill="#fda4af"/>
+                    <rect x="42" y="40" width="16" height="50" fill="#be123c"/>
+                    <rect x="15" y="60" width="70" height="8" fill="#be123c" opacity="0.3"/>
+                </g>
+                <!-- Box Lid -->
+                <g class="gift-lid">
+                    <rect x="10" y="25" width="80" height="18" rx="4" fill="#fecdd3"/>
+                    <rect x="42" y="25" width="16" height="18" fill="#be123c"/>
+                    <!-- Bow -->
+                    <path d="M50 25 C 40 10, 20 15, 25 25 C 30 35, 45 25, 50 25" fill="#be123c"/>
+                    <path d="M50 25 C 60 10, 80 15, 75 25 C 70 35, 55 25, 50 25" fill="#be123c"/>
+                    <circle cx="50" cy="25" r="6" fill="#9f1239"/>
+                </g>
+            </svg>
+
+            <!-- Inline SVG Headphones (Hidden initially) -->
+            <svg class="headset-reveal" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Headband -->
+                <path d="M20 50 V 40 C 20 25 32 15 50 15 C 68 15 80 25 80 40 V 50" stroke="#be123c" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <path d="M20 50 V 40 C 20 25 32 15 50 15 C 68 15 80 25 80 40 V 50" stroke="#fda4af" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                <!-- Left Earcup -->
+                <rect x="12" y="48" width="16" height="24" rx="8" fill="#be123c"/>
+                <rect x="14" y="50" width="12" height="20" rx="6" fill="#fecdd3"/>
+                <!-- Right Earcup -->
+                <rect x="72" y="48" width="16" height="24" rx="8" fill="#be123c"/>
+                <rect x="74" y="50" width="12" height="20" rx="6" fill="#fecdd3"/>
+                <!-- Cute Heart Detail -->
+                <path d="M78 58 C 78 56, 75 55, 75 58 C 75 61, 78 63, 78 63 C 78 63, 81 61, 81 58 C 81 55, 78 56, 78 58" fill="#fff1f2"/>
+            </svg>
+        </div>
+
+        <div id="giftText" class="hidden" style="text-align: center; max-width: 350px;">
+            <h3 style="color: var(--dark-pink); margin-bottom: 0.5rem;">🎧 A little something for you.</h3>
+            <p style="font-size: 0.95rem;">I hope you love it as much as I loved choosing it for you.</p>
+            <button class="btn" onclick="goToScreen(4)" style="animation: none; margin-top: 1.5rem;">Read my letter 💌</button>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 4: PERSONAL MESSAGE 💌              -->
+    <!-- ========================================== -->
+    <section class="screen" id="screen4">
+        <div class="glass-card">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">To my favorite person,</h2>
+            <div class="typing-text" id="typingContainer">
+                <span id="typedText"></span><span class="cursor"></span>
+            </div>
+            <button class="btn hidden" id="finalBtn" onclick="goToScreen(5)" style="animation: none; margin-top: 2rem;">One last thing... ✨</button>
+        </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- SCREEN 5: FINAL SURPRISE                   -->
+    <!-- ========================================== -->
+    <section class="screen" id="screen5">
+        <h1 style="font-size: 2.5rem; animation: heartbeat 2s infinite;">Happy Birthday,<br>beautiful. 💗</h1>
+        <p style="margin-top: 1rem; font-size: 1.1rem;">Here's to another year of you.</p>
+        <p style="margin-top: 3rem; font-size: 0.9rem; opacity: 0.8; font-style: italic;">
+            Made with love, just for you. ♡
+        </p>
+    </section>
+
+    <script>
+        /* ========================================== */
+        /* CONFIGURATION & EDITABLE TEXT              */
+        /* ========================================== */
+        
+        // EDIT YOUR PERSONAL MESSAGE HERE
+        const personalMessage = `I hope this birthday brings you as much happiness as you bring into my life.\n\nYou deserve beautiful things, beautiful moments, and all the love in the world.\n\nThank you for being you.\n\nHappy Birthday, ❤️`;
+
+        /* ========================================== */
+        /* STATE MANAGEMENT                           */
+        /* ========================================== */
+        let currentScreen = 1;
+        let isTyping = false;
+
+        /* ========================================== */
+        /* NAVIGATION                                 */
+        /* ========================================== */
+        function goToScreen(screenNum) {
+            // Hide current
+            document.getElementById(`screen${currentScreen}`).classList.remove('active');
+            
+            // Small delay for smooth transition
+            setTimeout(() => {
+                currentScreen = screenNum;
+                const nextScreen = document.getElementById(`screen${currentScreen}`);
+                nextScreen.classList.add('active');
+                
+                // Trigger specific screen logic
+                if (currentScreen === 4 && !isTyping) {
+                    startTypingEffect();
+                }
+                if (currentScreen === 5) {
+                    intensifyHearts();
+                }
+            }, 400);
+        }
+
+        /* ========================================== */
+        /* GIFT REVEAL LOGIC                          */
+        /* ========================================== */
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            const giftText = document.getElementById('giftText');
+            
+            if (!giftBox.classList.contains('opened')) {
+                giftBox.classList.add('opened');
+                createHeartBurst(window.innerWidth / 2, window.innerHeight / 2 - 50);
+                
+                // Show text after animation
+                setTimeout(() => {
+                    giftText.classList.remove('hidden');
+                    giftText.style.animation = 'fadeIn 1s ease forwards';
+                }, 800);
+            }
+        }
+
+        /* ========================================== */
+        /* TYPING EFFECT                              */
+        /* ========================================== */
+        function startTypingEffect() {
+            isTyping = true;
+            const element = document.getElementById('typedText');
+            const cursor = document.querySelector('.cursor');
+            const finalBtn = document.getElementById('finalBtn');
+            let index = 0;
+            
+            // Clear previous
+            element.textContent = '';
+            finalBtn.classList.add('hidden');
+
+            function type() {
+                if (index < personalMessage.length) {
+                    element.textContent += personalMessage.charAt(index);
+                    index++;
+                    setTimeout(type, 40); // Typing speed (lower = faster)
+                } else {
+                    cursor.style.display = 'none';
+                    setTimeout(() => {
+                        finalBtn.classList.remove('hidden');
+                        finalBtn.style.animation = 'fadeIn 1s ease forwards';
+                    }, 500);
+                }
+            }
+            type();
+        }
+
+        /* ========================================== */
+        /* BACKGROUND ANIMATIONS                      */
+        /* ========================================== */
+        const bgContainer = document.getElementById('background-effects');
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤';
+            
+            // Randomize properties
+            const size = Math.random() * 20 + 10; // 10px to 30px
+            const left = Math.random() * 100; // 0% to 100%
+            const duration = Math.random() * 5 + 6; // 6s to 11s
+            const drift = (Math.random() - 0.5) * 100; // -50px to 50px
+            
+            heart.style.fontSize = `${size}px`;
+            heart.style.left = `${left}%`;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.setProperty('--drift', `${drift}px`);
+            
+            bgContainer.appendChild(heart);
+            
+            // Cleanup
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            
+            const size = Math.random() * 4 + 2;
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const duration = Math.random() * 2 + 1;
+            
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${left}%`;
+            sparkle.style.top = `${top}%`;
+            sparkle.style.animationDuration = `${duration}s`;
+            
+            bgContainer.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, duration * 1000);
+        }
+
+        // Continuous background generation
+        setInterval(createFloatingHeart, 800);
+        setInterval(createSparkle, 400);
+
+        function intensifyHearts() {
+            // For the final screen, add more hearts
+            setInterval(createFloatingHeart, 300);
+        }
+
+        /* ========================================== */
+        /* INTERACTIVE HEART BURST                    */
+        /* ========================================== */
+        function createHeartBurst(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('burst-heart');
+                heart.innerHTML = '💖';
+                heart.style.left = `${x}px`;
+                heart.style.top = `${y}px`;
+                
+                // Randomize burst direction slightly
+                const randomX = (Math.random() - 0.5) * 60;
+                heart.style.transform = `translate(calc(-50% + ${randomX}px), -50%)`;
+                
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 1000);
+            }
+        }
+
+        // Add burst effect to all buttons on click/touch
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                createHeartBurst(x, y);
+            });
+        });
+
+        /* ========================================== */
+        /* MUSIC TOGGLE LOGIC                         */
+        /* ========================================== */
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic'); // Will be undefined if commented out
+
+        if (bgMusic) {
+            musicBtn.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicBtn.classList.add('playing');
+                    musicBtn.textContent = '♫';
+                } else {
+                    bgMusic.pause();
+                    musicBtn.classList.remove('playing');
+                    musicBtn.textContent = '♪';
+                }
+            });
+        } else {
+            // Hide music button if no audio element is present
+            musicBtn.style.display = 'none';
+        }
+
+        /* ========================================== */
+        /* CSS ANIMATION HELPERS                      */
+        /* ========================================== */
+        const styleSheet = document.createElement("style");
+        styleSheet.innerText = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+
+        // Prevent double-tap zoom on mobile
+        document.addEventListener('dblclick', function(event) {
+            event.preventDefault();
+        }, { passive: false });
+
+    </script>
+</body>
+</html>
